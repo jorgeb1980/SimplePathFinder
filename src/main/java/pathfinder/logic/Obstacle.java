@@ -16,28 +16,21 @@ import lombok.Getter;
 public class Obstacle {
 
 	
-	public enum Orientation { 
-		NORTH(0, -1), EAST(1, 0), WEST(-1, 0), SOUTH(0, 1);
-		
-		private Orientation(int horizontal, int vertical) { 
-			this.horizontal = horizontal;
-			this.vertical = vertical;
-		}
-		
-		@Getter private int horizontal;
-		@Getter private int vertical;
-	}
-	
 	@Getter private int x;
 	@Getter private int y;
 	@Getter private int length;
 	@Getter private Orientation orientation;
 	
 	public Obstacle(int x, int y, int length) {
+		this(x, y, length, null);
+	}
+	
+	public Obstacle(int x, int y, int length, Orientation orientation) {
 		this.x = x;
 		this.y = y;
 		this.length = length;
-		orientation = Orientation.values()[randomInt(Orientation.values().length)];
+		if (orientation != null) this.orientation = orientation;
+		else this.orientation = Orientation.values()[randomInt(Orientation.values().length)];
 	}
 
 	public void flipObstacle() {
@@ -58,7 +51,7 @@ public class Obstacle {
 	private void push(List<Pair> pairs, Orientation orientation) {
 		if (pairs.size() > 0) {
 			Pair top = pairs.get(pairs.size() - 1);
-			pairs.add(top.apply(orientation));
+			pairs.add(top.apply(orientation.getVector()));
 		}
 	}
 }

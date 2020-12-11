@@ -14,8 +14,12 @@ public class TestGrid {
 	private void createGrid(int rows, int columns, ObstacleSize size) {
 		System.out.printf("Creating grid with %s obstacles\n", size);
 		NodeGrid grid = new NodeGrid(rows, columns);
-		for (int i = 0; i < 5; i++) grid.addRandomObstacle(size);
-		System.out.println(grid.toString());
+		int counter = 0;
+		for (int i = 0; i < 5; i++) {
+			if (grid.addRandomObstacle(size)) counter++;
+		}
+		System.out.printf("%d obstacles set\n", counter);
+		System.out.println(AsciiPresentation.toAscii(grid, null));
 	}
 
 	@Test
