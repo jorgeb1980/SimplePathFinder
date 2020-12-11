@@ -56,7 +56,7 @@ public class NodeGrid {
 		return sb.toString();
 	}
 	
-	public void addRandomObstacle(ObstacleSize size) {
+	public boolean addRandomObstacle(ObstacleSize size) {
 		int rows = nodes.length;
 		int columns = nodes[0].length;
 		int average = (rows + columns) / 2;
@@ -79,6 +79,7 @@ public class NodeGrid {
 			}
 			counter++;
 		}
+		return obstacleSet;
 	}
 
 	// This method checks if the 
